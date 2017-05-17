@@ -7,14 +7,15 @@ var fs = require("fs");
 // Variable variables. The best type of variable.
 
 var discord_Token = fs.readFileSync("./no_upload/token.txt").toString();
-var currentGame = "games wit'chu.";
-var botName = "FiaBot";
+
+var botName = "FiaBotX";
 var prefix = "?";
 
 var HelpColour = 0x7400E8;
 var InfoColour = 0x00BB29;
 var MsgColour = 0xFF670F;
 var ErrorColour = 0x8b0000;
+var TitleLink = "https://www.reddit.com/";
 
 var startTime = Date.now();
 
@@ -22,12 +23,7 @@ console.log("Joining...")
 
 // Begin!
 
-client.login(discord_Token);
-console.log("Logged in successfully.");
-
-client.on("ready", () => {
-	client.user.setGame(currentGame);
-});
+var currentGame = "games witchu.";
 
 function pairs(arr) {
 	var wins = {};
@@ -94,6 +90,15 @@ var command_List = {
 	}
 }
 
+client.login(discord_Token);
+console.log("Logged in successfully.");
+
+client.on("ready", () => {
+	client.user.setGame(currentGame);
+	console.log("We ready, holmes.")
+});
+
+
 client.on("message", msg => {
 	var msgContent = msg.content;
 	if (msg.author.id!=client.user.id && msg.content[0]==prefix){
@@ -157,7 +162,7 @@ function embedMessage(client,msg,colour,title,url,description,footer,del,member)
 	channelX.sendEmbed({
 	    color: colour,
 	    author: {
-	    	name: client.user.username,
+	    	name: botName,
 	      	icon_url: client.user.avatarURL
 	    },
 	    title: title,
