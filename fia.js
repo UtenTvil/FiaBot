@@ -1,29 +1,3 @@
-// Ooh, a startup!
-
-var discord_Main = require("discord.js");
-var client = new discord_Main.Client({autoReconnect:true});
-var fs = require("fs");
-
-// Variable variables. The best type of variable.
-
-var discord_Token = fs.readFileSync("./no_upload/token.txt").toString();
-
-var botName = "FiaBotX";
-var prefix = "?";
-
-var HelpColour = 0x7400E8;
-var InfoColour = 0x00BB29;
-var MsgColour = 0xFF670F;
-var ErrorColour = 0x8b0000;
-var TitleLink = "https://www.reddit.com/";
-
-var startTime = Date.now();
-
-console.log("Joining...")
-
-// Begin!
-
-var currentGame = "games witchu.";
 
 function pairs(arr) {
 	var wins = {};
@@ -50,6 +24,33 @@ function pairs(arr) {
     return wins;
 }
 
+
+// Ooh, a startup!
+
+var discord_Main = require("discord.js");
+var client = new discord_Main.Client({autoReconnect:true});
+var fs = require("fs");
+
+// Variable variables. The best type of variable.
+
+var discord_Token = fs.readFileSync("./no_upload/token.txt").toString();
+
+var botName = "FiaBotX";
+var prefix = "?";
+var currentGame = "games witchu.";
+
+var HelpColour = 0x7400E8;
+var InfoColour = 0x00BB29;
+var MsgColour = 0xFF670F;
+var ErrorColour = 0x8b0000;
+var TitleLink = "https://www.reddit.com/";
+
+var startTime = Date.now();
+
+console.log("Joining...")
+
+// Begin!
+
 var RolesList = [];
 var RolesListStandings = {};
 var RolesNameStandings = {};
@@ -62,7 +63,7 @@ var command_List = {
 			for (var i in GuildRoles){
 				RolesList.push(GuildRoles[i]);
 				var CurrentRoleArray = msg.guild.members.filter(function(membToCh){
-					if(membToCh.roles.has(RolesList[i])){
+					if(membToCh.roles.has(RolesList[i]) && membToCh.presence.status != "offline"){
 						if (RolesListStandings[RolesList[i]]){
 							RolesListStandings[RolesList[i]] = RolesListStandings[RolesList[i]]+1;
 						} else {
@@ -100,6 +101,7 @@ client.on("ready", () => {
 
 
 client.on("message", msg => {
+	client.user.setGame(currentGame);
 	var msgContent = msg.content;
 	if (msg.author.id!=client.user.id && msg.content[0]==prefix){
 		console.log(msg.author+": "+msg.content);
