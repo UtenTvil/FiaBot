@@ -95,6 +95,7 @@ var command_List = {
 }
 
 client.on("message", msg => {
+	var msgContent = msg.content;
 	if (msg.author.id!=client.user.id && msg.content[0]==prefix){
 		console.log(msg.author+": "+msg.content);
 		var command = msgContent.split(" ")[0].substring(prefix.length).toLowerCase(); // take the first word and get everything after the first letter.
