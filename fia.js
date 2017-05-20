@@ -3,27 +3,28 @@ function pairs(arr) {
 	var wins = {};
     for(var i in arr){
         for(var j in arr){
-			var TeamOneScore = RolesNameStandings[arr[i]]; // 8
-			var TeamTwoScore = RolesNameStandings[arr[j]]; // 6
-			var ProbOneWin = (TeamOneScore/(TeamOneScore+TeamTwoScore)); // 8/14 (0.57)
-			if (Math.random()<=ProbOneWin){
-				if (wins[arr[i]]){
-					wins[arr[i]] = wins[arr[i]]+1;
+			if (arr[j]!=arr[i]){
+				var TeamOneScore = RolesNameStandings[arr[i]]; // 8
+				var TeamTwoScore = RolesNameStandings[arr[j]]; // 6
+				var ProbOneWin = (TeamOneScore/(TeamOneScore+TeamTwoScore)); // 8/14 (0.57)
+				if (Math.random()<=ProbOneWin){
+					if (wins[arr[i]]){
+						wins[arr[i]] = wins[arr[i]]+1;
+					} else {
+						wins[arr[i]] = 1;
+					}
 				} else {
-					wins[arr[i]] = 1;
-				}
-			} else {
-				if (wins[arr[j]]){
-					wins[arr[j]] = wins[arr[j]]+1;
-				} else {
-					wins[arr[j]] = 1;
+					if (wins[arr[j]]){
+						wins[arr[j]] = wins[arr[j]]+1;
+					} else {
+						wins[arr[j]] = 1;
+					}
 				}
 			}
 		}
 	}
     return wins;
 }
-
 
 // Ooh, a startup!
 
